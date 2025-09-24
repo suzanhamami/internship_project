@@ -6,7 +6,7 @@ sealed class TranscriptionState {}
 
 final class TranscriptionInitial extends TranscriptionState {}
 
-class AudioUploading extends TranscriptionState {}
+final class AudioUploading extends TranscriptionState {}
 
 class AudioUploadedSuccessfully extends TranscriptionState {
   final String response;
@@ -14,18 +14,18 @@ class AudioUploadedSuccessfully extends TranscriptionState {
 }
 
 class TranscriptionError extends TranscriptionState {
-  String message;
+  final String message;
   TranscriptionError({
     required this.message,
   });
 }
 
 class TranscriptionLoading extends TranscriptionState {
-  String transcriptId;
+  final String transcriptId;
   TranscriptionLoading({required this.transcriptId});
 }
 
 class TranscriptionReady extends TranscriptionState {
-  TranscriptEntity transcript;
+  final TranscriptEntity transcript;
   TranscriptionReady({required this.transcript});
 }
