@@ -1,5 +1,5 @@
 import 'dart:io';
-import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:internship_project/domain/entity/transcript_entity.dart';
 import 'package:internship_project/domain/repository/transcript_repo.dart';
@@ -20,30 +20,38 @@ class TranscriptionBloc extends Bloc<TranscriptionEvent, TranscriptionState> {
           (failure) => emit(TranscriptionError(message: failure.message)),
           (uploadUrl) async {
             emit(AudioUploadedSuccessfully(response: uploadUrl));
-            final transcribeResult = await transcriptRepo.transcribeAudio(
-              uploadUrl: uploadUrl,
-            );
-            transcribeResult.fold(
-              (failure) => emit(TranscriptionError(message: failure.message)),
-              (transcriptId) async {
-                emit(TranscriptionLoading(transcriptId: transcriptId));
-                final transcriptResult = await transcriptRepo.getTranscript(
-                  transcriptId: transcriptId,
-                );
-                transcriptResult.fold(
-                  (failure) =>
-                      emit(TranscriptionError(message: failure.message)),
-                  (transcriptEntity) {
-                    emit(TranscriptionReady(transcript: transcriptEntity));
-                  },
-                );
-              },
-            );
+            try {
+              final transcribeResult = await transcriptRepo.transcribeAudio(
+                uploadUrl: uploadUrl,
+              );
+              transcribeResult.fold(
+                (failure) => emit(TranscriptionError(message: failure.message)),
+                (transcriptId) async {
+                  emit(TranscriptionLoading(transcriptId: transcriptId));
+                  try {
+                    final transcriptResult = await transcriptRepo.getTranscript(
+                      transcriptId: transcriptId,
+                    );
+                    transcriptResult.fold(
+                      (failure) =>
+                          emit(TranscriptionError(message: failure.message)),
+                      (transcriptEntity) {
+                        emit(TranscriptionReady(transcript: transcriptEntity));
+                      },
+                    );
+                  } catch (e) {
+                    emit(TranscriptionError(message: 'Failed to get transcript: ${e.toString()}'));
+                  }
+                },
+              );
+            } catch (e) {
+              emit(TranscriptionError(message: 'Failed to transcribe audio: ${e.toString()}'));
+            }
           },
         );
       } catch (e, s) {
-        print("from bloc layer");
-        print(s);
+        debugPrint("TranscriptionBloc error: $e");
+        debugPrint("Stack trace: $s");
         emit(TranscriptionError(message: e.toString()));
       }
     });
