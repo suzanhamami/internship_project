@@ -1,16 +1,41 @@
-# internship_project
+# Arabic Memorization App
+A Flutter application that uploads an audio file, transcribes it using AssemblyAI, then formats the transcript (removing filler words, normalizing some Arabic letters that could cause confusion)
 
-A new Flutter project.
+## Features
+- Upload audio files in Arabic.
+- Send audio to AssemblyAI for transcription.
+- Remove filler words (specific to Syrian Arabic).
+- Normalize Arabic letters that are variations of the same letter.
 
-## Getting Started
+## Technologies
+- Flutter
+- Dart
+- BLoC for state management
+- Dio for HTTP requests
+- GetIt for dependency injection
+- AssemblyAI API
 
-This project is a starting point for a Flutter application.
+## Installation
+1. Clone the repository:
+    ```
+    git clone https://github.com/suzanhamami/arabic_memorization_helper.git
+    ```
+2. Install dependencies:
+    ```
+    flutter pub get
+    ```
+3. Add environment variables:
+    create an .env file in the root of your project
+    add your API key:
+    ```
+    API_KEY=your_assemblyai_api_key
+    ```
+4. Run the app:
+    ```
+    flutter run
+    ```
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Usage
+- Tap the upload button to select an audio file.
+- The app uploads and transcribes it automatically.
+- View the formatted transcript on screen.

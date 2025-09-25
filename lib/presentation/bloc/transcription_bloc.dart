@@ -58,6 +58,8 @@ class TranscriptionBloc extends Bloc<TranscriptionEvent, TranscriptionState> {
         emit(TranscriptionError(message: "Unexpected error: ${e.toString()}"));
       }
     });
+  }
+}
     //   try {
     //     final uploadResult = await transcriptRepo.uploadAudio(
     //       audioFile: event.file,
@@ -101,5 +103,3 @@ class TranscriptionBloc extends Bloc<TranscriptionEvent, TranscriptionState> {
     //     emit(TranscriptionError(message:"Failed to upload audio: ${e.toString()}"));
     //   }
     //  });
-  }
-}
