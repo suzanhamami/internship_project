@@ -3,12 +3,12 @@ import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import 'package:internship_project/domain/entity/transcript_entity.dart';
 
-abstract class ResponseModel {}
+// abstract class ResponseModel {}
 
-class ErrorModel extends ResponseModel {
-  String error;
-  ErrorModel({required this.error});
-}
+// class ErrorModel extends ResponseModel {
+//   String error;
+//   ErrorModel({required this.error});
+// }
 
 class TranscriptModel extends TranscriptEntity {
   TranscriptModel({required super.text, required super.words});

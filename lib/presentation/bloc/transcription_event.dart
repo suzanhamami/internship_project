@@ -5,6 +5,6 @@ part of 'transcription_bloc.dart';
 sealed class TranscriptionEvent {}
 
 class AudioUploaded extends TranscriptionEvent {
-  File file;
+  final File file;
   AudioUploaded({required this.file});
 }

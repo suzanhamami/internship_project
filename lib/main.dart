@@ -4,6 +4,7 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:internship_project/core/utils/text_formatting.dart';
 import 'package:internship_project/presentation/bloc/transcription_bloc.dart';
 import 'package:internship_project/core/service_locator.dart';
 
@@ -67,8 +68,10 @@ class HomePage extends StatelessWidget {
                   ],
                 );
               case TranscriptionReady():
+                TextFormatting formattedTranscript = TextFormatting(
+                );
                 return SingleChildScrollView(
-                  child: Text(state.transcript.text),
+                  child: Text(formattedTranscript.formatText(state.transcript.text)),
                 );
               default:
                 return Text("Click button to upload audio");
@@ -81,11 +84,9 @@ class HomePage extends StatelessWidget {
           FilePickerResult? result = await FilePicker.platform.pickFiles();
           if (result != null) {
             File file = File(result.files.single.path!);
-    
+
             if (context.mounted) {
-              context.read<TranscriptionBloc>().add(
-                AudioUploaded(file: file),
-              );
+              context.read<TranscriptionBloc>().add(AudioUploaded(file: file));
             }
           } else {
             // User canceled the picker

@@ -53,6 +53,8 @@ class TranscriptionDataSource {
           "format_text": false,
           "punctuate": false,
           "disfluencies": true,
+          // "language_code": "ar",
+          "language_detection": true
         },
       );
       print(response.data);

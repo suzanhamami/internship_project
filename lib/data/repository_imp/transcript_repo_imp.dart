@@ -10,7 +10,7 @@ import 'package:internship_project/domain/entity/transcript_entity.dart';
 import 'package:internship_project/domain/repository/transcript_repo.dart';
 
 class TranscriptRepoImp implements TranscriptRepo {
-  TranscriptionDataSource transcriptionDataSource;
+  final TranscriptionDataSource transcriptionDataSource;
   TranscriptRepoImp({required this.transcriptionDataSource});
 
   @override
