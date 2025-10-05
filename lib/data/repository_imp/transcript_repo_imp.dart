@@ -21,7 +21,7 @@ class TranscriptRepoImp implements TranscriptRepo {
       );
       return Right(uploadUrl);
     } on ServerException catch (e) {
-      print("from repo imp");
+      print("from repo imp upload");
       return Left(ServerFailure(message: e.message));
     } catch (e) {
       return Left(ServerFailure(message: "Unexpected error: ${e.toString()}"));
@@ -36,7 +36,7 @@ class TranscriptRepoImp implements TranscriptRepo {
       );
       return Right(transcriptId);
     } on ServerException catch (e) {
-      print("from repo imp");
+      print("from repo imp transcribe");
       return Left(ServerFailure(message: e.message));
     } catch (e) {
       return Left(ServerFailure(message: "Unexpected error: ${e.toString()}"));

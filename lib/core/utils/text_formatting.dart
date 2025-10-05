@@ -35,28 +35,51 @@ class TextFormatting {
     "لحظة",
     "خليني أقول",
   };
-  String formatText(String transcript) {
-    transcript = fixLetters(transcript);
-    transcript = removeFillerWords(transcript);
-    return transcript;
+
+  String formatText(String text) {
+    text = removeZeroWidth(text);
+    text = removeLigatures(text);
+    text = removePunctuation(text);
+    text = fixLetters(text);
+    text = fixSpaces(text);
+    text = removeFillerWords(text);
+    return text;
   }
 
-  String removeFillerWords(String transcript) {
-    List<String> words = transcript.split(' ');
-    words = words.where((word) => !arabicFillerWords.contains(word)).toList();
-    return words.join(' ');
+  String removeZeroWidth(String text) {
+    return text.replaceAll(RegExp(r'[\u200C\u200D]'), '');
   }
 
-  String fixLetters(String transcript) {
-    String text = transcript;
+  String removeLigatures(String text) {
+    return text.replaceAll('\uFEFB', 'لا');
+  }
+
+  String removePunctuation(String text) {
+    text = text.replaceAll(RegExp(r'[^\w\s\u0600-\u06FF]'), '');
+    return text;
+  }
+
+  String fixLetters(String text) {
     text = text.replaceAll("آ", "ا");
+    text = text.replaceAll(RegExp('[أإآ]'), 'ا');
     text = text.replaceAll("أ", "ا");
     text = text.replaceAll("إ", "ا");
     text = text.replaceAll("ة", "ه");
     return text;
   }
-}
 
+  String fixSpaces(String text) {
+    text = text.trim();
+    text = text.replaceAll(RegExp(r'\s+'), ' ');
+    return text;
+  }
+
+  String removeFillerWords(String text) {
+    List<String> words = text.split(' ');
+    words = words.where((word) => !arabicFillerWords.contains(word)).toList();
+    return words.join(' ');
+  }
+}
 
 // Set<String> fillerWords = {
   //   // Hesitation sounds / simple fillers
