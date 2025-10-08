@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:internship_project/domain/entity/transcript_entity.dart';
 import 'package:internship_project/presentation/comparison/result_page.dart';
 import 'package:internship_project/presentation/transcription/bloc/transcription_bloc.dart';
 // import 'package:just_audio/just_audio.dart';
@@ -73,11 +74,14 @@ class _HomePageState extends State<HomePage> {
               listener: (context, state) {
                 switch (state) {
                   case TranscriptionReady():
+                    TranscriptEntity originalTextEntity = TranscriptEntity(
+                      text: originalText.text,
+                    );
                     Navigator.push(
                       context,
                       MaterialPageRoute(
                         builder: (context) => ResultPage(
-                          originalText: originalText.text,
+                          originalText: originalTextEntity,
                           userText: state.transcript,
                         ),
                       ),
@@ -156,10 +160,7 @@ class _HomePageState extends State<HomePage> {
         final Directory directory = await getApplicationDocumentsDirectory();
         final String filePath = "${directory.path}/recording.m4a";
         try {
-          audioRecorder.start(
-            const RecordConfig(),
-            path: filePath,
-          );
+          audioRecorder.start(const RecordConfig(), path: filePath);
           setState(() {
             isRecording = true;
           });

@@ -1,6 +1,7 @@
-import 'package:bloc/bloc.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:internship_project/domain/entity/transcript_entity.dart';
 import 'package:internship_project/domain/use_case/compare_texts.dart';
-import 'package:meta/meta.dart';
 
 part 'comparison_event.dart';
 part 'comparison_state.dart';
@@ -13,8 +14,8 @@ class ComparisonBloc extends Bloc<ComparisonEvent, ComparisonState> {
       emit(ComparisonLoading());
       try {
         final score = compareTextsUseCase.call(
-          originalText: event.originalText,
-          userText: event.userText,
+          originalText: event.originalText.text,
+          userText: event.userText.text,
         );
         final wrongWords = compareTextsUseCase.getWrongWords();
         emit(ComparisonSuccess(score: score, wrongWords: wrongWords));

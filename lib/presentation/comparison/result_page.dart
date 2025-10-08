@@ -6,7 +6,7 @@ import 'package:internship_project/domain/entity/transcript_entity.dart';
 import 'package:internship_project/presentation/comparison/bloc/comparison_bloc.dart';
 
 class ResultPage extends StatelessWidget {
-  final String originalText;
+  final TranscriptEntity originalText;
   final TranscriptEntity userText;
   const ResultPage({
     Key? key,
@@ -48,7 +48,7 @@ class ResultPage extends StatelessWidget {
                     context.read<ComparisonBloc>().add(
                       ComparisonRequested(
                         originalText: originalText,
-                        userText: userText.text,
+                        userText: userText,
                       ),
                     );
                   },

@@ -10,9 +10,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await dotenv.load(fileName: '.env');
 
-  setUpLocator();
-  // String sen = "heyyy";
-  // sen.substring(1);
+  await setUpLocator();
   runApp(const MyApp());
 }
 
@@ -21,14 +19,12 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return // TranscriptionBloc(),
-    MultiBlocProvider(
+    return MultiBlocProvider(
       providers: [
-      BlocProvider(create: (context) => getIt<TranscriptionBloc>()),
-      BlocProvider(create: (context) => getIt<ComparisonBloc>(),)
+        BlocProvider(create: (context) => getIt<TranscriptionBloc>()),
+        BlocProvider(create: (context) => getIt<ComparisonBloc>()),
       ],
       child: MaterialApp(home: HomePage()),
     );
   }
 }
-

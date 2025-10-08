@@ -5,8 +5,8 @@ part of 'comparison_bloc.dart';
 sealed class ComparisonEvent {}
 
 class ComparisonRequested extends ComparisonEvent {
-  final String originalText;
-  final String userText;
+  final TranscriptEntity originalText;
+  final TranscriptEntity userText;
   ComparisonRequested({
     required this.originalText,
     required this.userText,

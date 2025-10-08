@@ -34,7 +34,6 @@ class LevenshtienAlg {
     for (var i = 1; i < n + 1; i++) {
       for (var j = 1; j < m + 1; j++) {
         int cost = (originalTokens[i - 1] == userTokens[j - 1]) ? 0 : 1;
-        // if (cost == 1) wrongWords.add(userTokens[i - 1]);
         dpMatrix[i][j] = [
           dpMatrix[i - 1][j] + 1,
           dpMatrix[i][j - 1] + 1,
