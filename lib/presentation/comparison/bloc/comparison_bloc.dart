@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:internship_project/domain/entity/comparison_result_entity.dart';
 import 'package:internship_project/domain/entity/transcript_entity.dart';
 import 'package:internship_project/domain/use_case/compare_texts.dart';
 
@@ -13,12 +14,15 @@ class ComparisonBloc extends Bloc<ComparisonEvent, ComparisonState> {
     on<ComparisonRequested>((event, emit) {
       emit(ComparisonLoading());
       try {
-        final score = compareTextsUseCase.call(
+        final comparisonResult = compareTextsUseCase.call(
           originalText: event.originalText.text,
           userText: event.userText.text,
         );
-        final wrongWords = compareTextsUseCase.getWrongWords();
-        emit(ComparisonSuccess(score: score, wrongWords: wrongWords));
+        comparisonResult.fold(
+          (failure) => emit(ComparisonError(message: failure.message)),
+          (comparisonResult) =>
+              emit(ComparisonSuccess(comparisonResultEntity: comparisonResult)),
+        );
       } catch (e) {
         emit(ComparisonError(message: "Unexpected error: ${e.toString()}"));
       }

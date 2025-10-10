@@ -83,6 +83,7 @@ class TranscriptionDataSource {
         print(status);
         if (status == "completed") {
           TranscriptModel transcript = TranscriptModel.fromMap(response.data);
+          print(transcript);
           return transcript;
         } else if (status == "error") {
           throw TranscribingFailedException(

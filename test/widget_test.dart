@@ -11,7 +11,7 @@ void main() {
   });
   test("Returns score", () {
     final comparer = getIt<LevenshtienAlg>();
-    String score = comparer.compareText(
+    final score = comparer.compareText(
       originalText: "I ate an apple",
       userText: "I eat apple",
     );
@@ -21,7 +21,7 @@ void main() {
 
   test("Score for longer text", () {
     final comparer = getIt<LevenshtienAlg>();
-    String score2 = comparer.compareText(
+    final score2 = comparer.compareText(
       originalText: "I ate an apple",
       userText: "I eat apple every other day",
     );

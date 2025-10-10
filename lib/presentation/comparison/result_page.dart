@@ -35,9 +35,9 @@ class ResultPage extends StatelessWidget {
                 return Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text(state.score, style: TextStyle(fontSize: 28)),
+                    Text(state.comparisonResultEntity.score, style: TextStyle(fontSize: 28)),
                     Text(
-                      "Words you got wrong: ${state.wrongWords.toString()}",
+                      "Words you got wrong: ${state.comparisonResultEntity.wrongWords.toString()}",
                       style: TextStyle(fontSize: 22),
                     ),
                   ],

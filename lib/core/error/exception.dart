@@ -12,6 +12,10 @@ class TranscriptNotReadyException extends BaseException {
   TranscriptNotReadyException({required super.message});
 }
 
-class TranscribingFailedException extends BaseException{
+class TranscribingFailedException extends BaseException {
   TranscribingFailedException({required super.message});
+}
+
+class InvalidLanguageException extends BaseException {
+  InvalidLanguageException({required super.message});
 }

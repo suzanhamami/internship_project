@@ -1,5 +1,5 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-class Failure {
+abstract class Failure {
   String message;
   Failure({
     required this.message,
@@ -8,4 +8,12 @@ class Failure {
 
 class ServerFailure extends Failure{
   ServerFailure({required super.message});
+}
+
+class InvalidLanguageFailure extends Failure{
+  InvalidLanguageFailure({required super.message});
+}
+
+class UnexpectedFailure extends Failure{
+  UnexpectedFailure({required super.message});
 }

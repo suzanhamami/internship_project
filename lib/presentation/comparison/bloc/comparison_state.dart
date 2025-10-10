@@ -9,11 +9,9 @@ final class ComparisonInitial extends ComparisonState {}
 final class ComparisonLoading extends ComparisonState {}
 
 class ComparisonSuccess extends ComparisonState {
-  final String score;
-  final List<String> wrongWords;
+  final ComparisonResultEntity comparisonResultEntity;
   ComparisonSuccess({
-    required this.score,
-    required this.wrongWords,
+    required this.comparisonResultEntity,
   });
 }
 
